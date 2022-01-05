@@ -1,0 +1,21 @@
+{% extends 'main.html'%}
+{% block content%}
+<div class="text-center">
+    <h1>{{curr_user.first_name}}</h1>
+    <small class="lead">{{curr_user.title}}</small><br>
+    <small class="lead">los Angeles, CA</small>
+</div><br><br><br>
+<div class="text-center">
+</div>
+<div class="container">
+    <h1 style="text-decoration: underline;">What's going on today:</h1>
+    <p class="lead">Updated {{today_date}}</p><br><br>
+    {% for data in results %}
+    <h3>{{data['name']}}</h3>
+    <small class="lead">{{data['description']}}</small> <br>
+    <p>More info <a href="{{data['url']}}" target="_blank">here</a></p>
+    <br><br><br><br>
+    {% endfor %}
+</div>
+
+{% endblock content%}

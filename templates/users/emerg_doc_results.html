@@ -1,0 +1,110 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Facility Name</th>
+                <th scope="col">Facility Address</th>
+                <th scope="col">Route</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <h1 class="text-center">Results</h1><br><br>
+            {% for hospital in hospitals_located %}
+
+            <tr>
+                <form action="/testing-map/{{hospital['place_name']}}" method="post">
+                    <td>{{hospital['text']}}</td>
+                    <td>{{hospital['place_name']}}</td>
+                    <input name="hospital_address" hidden id="hospital_address" value="{{hospital['place_name']}}">
+                    <td><button class="btn btn-sm btn-outline-light">Route</button></td>
+                </form>
+                <form action="/save/{{hospital['place_name']}}" method="post">
+                    <td><button class="btn btn-sm btn-outline-info">Save</button></td>
+                </form>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+
+    <div style="width: 10%; position: absolute; left: 850px;" class="alert alert-{{category}} text-center" id="fade">
+        {{message}} </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div><br><br>
+<hr><br><br>
+</div>
+<div class="container">
+    {% if saved_data == 0 %}
+    <div class="list-group">
+        <h1 class="text-center">Emerg-Doc List</h1><br><br>
+        <table class="table table-bordered table-light">
+            <thead>
+                <tr>
+                    <th scope="col">ID#</th>
+                    <th scope="col">Facility Name</th>
+                    <th scope="col">Facility Address</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+        </table>
+        <p class="text-center">There is no saved data here.</p>
+        {% else %}
+        <div class="list-group">
+            <h1 class="text-center">Emerg-Doc List</h1><br><br>
+            <table class="table table-bordered table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Facility Name</th>
+                        <th scope="col">Facility Address</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for centers in user_centers %}
+                    <tr>
+
+                        <th scope="row">{{centers.medical_centers.id}}</th>
+
+                        <td>{{centers.medical_centers.facility_name}}</td>
+
+                        <td>{{centers.medical_centers.place_address}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <form target="_blank" action="/testing-map/{{centers.medical_centers.place_address}}"
+                                    method="post">
+                                    <input name="hospital_address" hidden id="hospital_address"
+                                        value="{{centers.medical_centers.place_address}}">
+                                    <button class="btn btn-sm btn-primary">Route</button>
+                                </form>
+                                <span>&nbsp;&nbsp;</span>
+                                <form action="/delete/{{centers.medical_centers.id}}" method="post">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% endif %}
+
+
+        </div><br><br><br>
+
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="/static/users.js"></script>
+        {% endblock %}

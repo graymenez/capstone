@@ -1,0 +1,54 @@
+{%extends 'main.html'%}
+{% block content %}
+<h1 class="text-center" style="position: relative; top: 100px;">Account settings <i class="fas fa-cogs"></i></h1>
+<div class="container" style="width: 400px; position: relative; top: 200px; padding-bottom: 100px;">
+    <div class="list-group">
+        <a href="/settings/edit-email"
+            class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Edit Your Email</h5>
+            </div>
+            <p class="mb-1">If you have a new primary email that you use. You can edit it your email here.
+            </p>
+            <small class="text-warning">You will need to confirm you password</small>&nbsp;<i
+                class="text-warning fas fa-exclamation-triangle fa-xs"></i>
+        </a>
+        &nbsp;
+        <a href="/settings/edit-title"
+            class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Edit Your title</h5>
+            </div>
+            <p class="mb-1">If you've gotten promoted, new job, or certified with a different title you can edit your
+                title here.
+            </p>
+            <small class="text-warning">You will need to confirm you password.</small>&nbsp;<i
+                class="text-warning fas fa-exclamation-triangle fa-xs"></i>
+        </a>
+        &nbsp;
+        <a href="/settings/password-change"
+            class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Change Your Password</h5>
+            </div>
+            <p class="mb-1">If you want to change your password, you can delete it here.
+            </p>
+            <small class="text-warning">You will need to confirm you password.</small>&nbsp;<i
+                class="text-warning fas fa-exclamation-triangle fa-xs"></i>
+        </a>
+        &nbsp;
+        <a href="/settings/delete" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 text-danger">Delete Your Account</h5>&nbsp;<i
+                    class="text-danger far fa-trash-alt fa-xs"></i>
+            </div>
+            <p class="mb-1">If you want to delete you account, you can delete it here.
+            </p>
+            <small class="text-warning">You will need to confirm you password.</small>&nbsp;<i
+                class="text-warning fas fa-exclamation-triangle fa-xs"></i>
+        </a>
+
+    </div>
+</div>
+
+{% endblock content %}

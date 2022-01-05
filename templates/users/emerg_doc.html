@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <div style="position: relative; top: 200px;">
+        <div class="text-center" ">
+    <a style=" font-size: 30px; width: 300px; height: 80px;" href=" /emerg-doc/results" class="btn btn-info">
+            Search
+            for Facilities</a>
+        </div><br><br><br>
+
+
+        {% if saved_data == 0 %}
+        <div class="list-group">
+            <h1 class="text-center">Emerg-Doc List</h1><br><br>
+            <table class="table table-bordered table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Facility Name</th>
+                        <th scope="col">Facility Address</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+            </table>
+            <p class="text-center">There is no saved data here.</p>
+            {% else %}
+            <div class="list-group">
+                <h1 class="text-center">Emerg-Doc List</h1><br><br>
+                <table class="table table-bordered table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID#</th>
+                            <th scope="col">Facility Name</th>
+                            <th scope="col">Facility Address</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for centers in user_centers %}
+                        <tr>
+
+                            <th scope="row">{{centers.medical_centers.id}}</th>
+
+                            <td>{{centers.medical_centers.facility_name}}</td>
+
+                            <td>{{centers.medical_centers.place_address}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <form target="_blank"
+                                        action="/testing-map/{{centers.medical_centers.place_address}}" method="post">
+                                        <input name="hospital_address" hidden id="hospital_address"
+                                            value="{{centers.medical_centers.place_address}}">
+                                        <button class="btn btn-sm btn-primary">Route</button>
+                                    </form>
+                                    <span>&nbsp;&nbsp;</span>
+                                    <form action="/delete/{{centers.medical_centers.id}}" method="post">
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% endif %}
+                <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+                <script src="/static/users.js"></script>
+                {% endblock %}
